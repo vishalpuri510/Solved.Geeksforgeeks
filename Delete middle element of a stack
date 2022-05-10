@@ -1,0 +1,43 @@
+Question-Given a stack with push(), pop(), empty() operations, delete the middle of the stack without using any additional data structure.
+Middle: ceil((size_of_stack+1)/2) (1-based index)
+ 
+
+Example 1:
+
+Input: 
+Stack = {1, 2, 3, 4, 5}
+Output:
+ModifiedStack = {1, 2, 4, 5}
+Explanation:
+As the number of elements is 5 , 
+hence the middle element will be the 3rd
+element which is deleted
+
+
+Solution-
+
+class Solution
+{
+    public void deleteMid(Stack<Integer>s,int sizeOfStack){
+            int mid =0;
+            if(s.size()%2==0) mid = (s.size()+2)/2;
+            else mid = (s.size()+1)/2;
+            helperfunc(s,mid);
+    
+        
+    } 
+    public void helperfunc(Stack<Integer> s,int mid){
+        if(mid == 1){
+            s.pop();
+            return;
+        }
+        
+        int temp = s.peek();
+        s.pop();
+        helperfunc(s,mid-1);
+        s.push(temp);
+        
+        
+        return;
+    }
+}
