@@ -1,0 +1,52 @@
+Question-
+
+Given a string S. The task is to print all permutations of a given string in lexicographically sorted order.
+
+Example 1:
+
+Input: ABC
+Output:
+ABC ACB BAC BCA CAB CBA
+Explanation:
+Given string ABC has permutations in 6 
+forms as ABC, ACB, BAC, BCA, CAB and CBA .
+
+Example 2:
+
+Input: ABSG
+Output:
+ABGS ABSG AGBS AGSB ASBG ASGB BAGS 
+BASG BGAS BGSA BSAG BSGA GABS GASB 
+GBAS GBSA GSAB GSBA SABG SAGB SBAG 
+SBGA SGAB SGBA
+Explanation:
+Given string ABSG has 24 permutations.
+
+Solution-
+
+class Solution {
+    public List<String> find_permutation(String S) {
+        // Code here
+        String asf="";
+        String qsf="";
+        List<String> al = new ArrayList<>();
+        helper(asf,S,al);
+        return al;
+    }
+    
+    public void helper(String asf,String qsf , List<String> al){
+        if(qsf.length()==0){
+            if(!al.contains(asf)) al.add(asf);            
+        }
+        //for loop is for picking different characters at different times;
+        for(int i=0;i<qsf.length();i++){
+            char ch = qsf.charAt(i);
+            String lpt = qsf.substring(0,i);
+            String rpt = qsf.substring(i+1);
+            String roq = lpt+rpt;
+            //answer so far is my answer;
+            //Qustion so far is like the prime thing who is making our permutation
+            helper(asf+ch,roq,al);
+        }
+    }
+}
