@@ -1,0 +1,71 @@
+Question-
+
+Given a keypad as shown in the diagram, and an N digit number which is represented by array a[ ], the task is to list all words which are possible by pressing 
+these numbers.
+
+
+Example 1:
+
+Input: N = 3, a[] = {2, 3, 4}
+Output:
+adg adh adi aeg aeh aei afg afh afi 
+bdg bdh bdi beg beh bei bfg bfh bfi 
+cdg cdh cdi ceg ceh cei cfg cfh cfi 
+Explanation: When we press 2,3,4 then 
+adg, adh, adi, ... cfi are the list of 
+possible words.
+Example 2:
+
+Input: N = 3, a[] = {3, 4, 5}
+Output:
+dgj dgk dgl dhj dhk dhl dij dik dil 
+egj egk egl ehj ehk ehl eij eik eil 
+fgj fgk fgl fhj fhk fhl fij fik fil
+Explanation: When we press 3,4,5 then 
+dgj, dgk, dgl, ... fil are the list of 
+possible words.
+
+Solution-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+class Solution
+{
+    //Function to find list of all words possible by pressing given numbers.
+    static ArrayList <String> possibleWords(int a[], int N)
+    {
+        // your code here
+        ArrayList<String> al = getkpc(a,N,0);
+        
+        return al;
+        
+    }
+    
+    //univeral String array for codes
+    static String[] codes = {"abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+    
+    static ArrayList<String> getkpc(int[] a , int N ,int idx){
+        
+        //base case
+        if(idx == N){
+            ArrayList<String> base = new ArrayList<>();
+            base.add("");
+            return base;
+        }
+        //taking out the string for the other elements int the array
+        String s = codes[a[idx] -2];
+        
+        //call for rres
+        ArrayList<String> rres = getkpc(a,N,idx+1);
+        ArrayList<String> mres = new ArrayList<>();
+        
+        //loop for fixing all the elements int the string
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            for(String rstr: rres){
+                mres.add(ch + rstr);
+            }
+        }
+        
+        return mres;
+    }
+}
+
